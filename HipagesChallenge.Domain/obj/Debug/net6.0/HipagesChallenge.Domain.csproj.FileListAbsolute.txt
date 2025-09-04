@@ -1,0 +1,12 @@
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\bin\Debug\net6.0\HipagesChallenge.Domain.deps.json
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\bin\Debug\net6.0\HipagesChallenge.Domain.dll
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\bin\Debug\net6.0\HipagesChallenge.Domain.pdb
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.csproj.AssemblyReference.cache
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.AssemblyInfoInputs.cache
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.AssemblyInfo.cs
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.csproj.CoreCompileInputs.cache
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.dll
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\refint\HipagesChallenge.Domain.dll
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\HipagesChallenge.Domain.pdb
+C:\Users\DD\Documents\DD\DEV\DTI\HipagesChallenge.Domain\obj\Debug\net6.0\ref\HipagesChallenge.Domain.dll
