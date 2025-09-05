@@ -1,10 +1,10 @@
 # Desafio Full Stack - Gerenciador de Leads
 
-[cite_start]Este projeto é uma solução para um desafio de estágio Full Stack, que consiste em um sistema de gerenciamento de leads. [cite: 5] [cite_start]A aplicação é composta por um backend construído com .NET 6 Web API e um frontend em React (SPA). [cite: 6, 7, 72]
+Este projeto é uma solução para um desafio de estágio Full Stack, que consiste em um sistema de gerenciamento de leads. A aplicação é composta por um backend construído com .NET 6 Web API e um frontend em React (SPA).
 
 ## Como Executar o Projeto
 
-[cite_start]Estas instruções irão guiá-lo para configurar e executar o projeto em uma máquina de desenvolvimento Windows a partir do zero. [cite: 85]
+Estas instruções irão guiá-lo para configurar e executar o projeto em uma máquina de desenvolvimento Windows a partir do zero.
 
 ### 1. Pré-requisitos (Software Necessário)
 
@@ -13,13 +13,13 @@ Antes de começar, você precisará baixar e instalar as seguintes ferramentas:
 * **Git:** Para clonar o repositório.
     * [**Download Git**](https://git-scm.com/downloads)
 
-* [cite_start]**.NET 6 SDK:** Para compilar e executar o backend (API). [cite: 71]
+* **.NET 6 SDK:** Para compilar e executar o backend (API).
     * [**Download .NET 6 SDK (x64)**](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 
 * **Node.js (Versão LTS):** Para gerenciar os pacotes e rodar o frontend (React).
     * [**Download Node.js**](https://nodejs.org/)
 
-* [cite_start]**SQL Server 2019 Express Edition:** O banco de dados que a aplicação utiliza. [cite: 73]
+* **SQL Server 2019 Express Edition:** O banco de dados que a aplicação utiliza.
     * [**Download SQL Server Express**](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
     * Durante a instalação, escolha o tipo **"Básico"** e siga os passos. Ao final, anote o **nome da instância** (geralmente `SQLEXPRESS`).
 
@@ -28,7 +28,7 @@ Antes de começar, você precisará baixar e instalar as seguintes ferramentas:
 
 ### 2. Configuração do Backend (API)
 
-1.  [cite_start]**Clone o repositório para sua máquina local:** [cite: 84]
+1.  **Clone o repositório para sua máquina local:**
     ```bash
     git clone <URL_DO_SEU_REPOSITORIO_GIT>
     ```
@@ -51,7 +51,7 @@ Antes de começar, você precisará baixar e instalar as seguintes ferramentas:
 
 4.  **Crie e Popule o Banco de Dados:**
     * Abra um terminal na pasta `HipagesChallenge.API`.
-    * [cite_start]Execute o comando abaixo para criar o banco de dados e as tabelas usando o Entity Framework. [cite: 74]
+    * Execute o comando abaixo para criar o banco de dados e as tabelas usando o Entity Framework.
         ```bash
         dotnet ef database update
         ```
