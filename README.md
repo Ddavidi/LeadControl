@@ -1,4 +1,4 @@
-# Desafio Full Stack - Gerenciador de Leads
+# Desafio Full Stack - Lead Control
 
 Este projeto é uma solução para um desafio de estágio Full Stack, que consiste em um sistema de gerenciamento de leads. A aplicação é composta por um backend construído com .NET 6 Web API e um frontend em React (SPA).
 
