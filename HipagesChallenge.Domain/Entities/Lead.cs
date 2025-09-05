@@ -1,4 +1,3 @@
-// Em HipagesChallenge.Domain/Entities/Lead.cs
 namespace HipagesChallenge.Domain.Entities
 {
     public class Lead

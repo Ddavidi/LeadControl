@@ -1,4 +1,3 @@
-// Em HipagesChallenge.Infrastructure/Persistence/AppDbContext.cs
 using HipagesChallenge.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

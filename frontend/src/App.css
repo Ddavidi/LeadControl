@@ -1,0 +1,42 @@
+body {
+  background-color: #f8f9fa;
+  font-family: sans-serif;
+  margin: 0;
+}
+.App {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+.tabs {
+  border-bottom: 2px solid #dee2e6;
+  margin-bottom: 20px;
+}
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  border-bottom: 2px solid transparent;
+}
+.tabs button.active {
+  border-bottom-color: #fd9800;
+  font-weight: bold;
+}
+.lead-card {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.lead-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.lead-name { font-weight: bold; font-size: 1.2em; }
+.lead-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+.lead-price { color: #6c757d; }
+.btn-accept, .btn-decline { padding: 10px 15px; border-radius: 5px; cursor: pointer; border: 1px solid; }
+.btn-accept { background-color: #fd9800; color: white; border-color: #fd9800; }
+.btn-decline { background-color: #e9ecef; color: #343a40; border-color: #ced4da; margin-left: 10px; }
