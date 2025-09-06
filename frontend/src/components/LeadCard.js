@@ -1,5 +1,5 @@
 import React from 'react';
-// 1. Importar os ícones que vamos usar da biblioteca Font Awesome (parte do react-icons)
+
 import { FaUser, FaBriefcase, FaPhone, FaEnvelope, FaCalendarAlt, FaMapMarkerAlt, FaMoneyBillWave } from 'react-icons/fa';
 
 const LeadCard = ({ lead, onAccept, onDecline }) => {
@@ -22,7 +22,7 @@ const LeadCard = ({ lead, onAccept, onDecline }) => {
 
       <hr />
 
-      {/* 2. Refatoramos a exibição dos detalhes para incluir os ícones */}
+      {/* Exibição dos detalhes para incluir os ícones */}
       <div className="lead-details">
         <div className="detail-item">
           <FaMapMarkerAlt className="icon" /> {/* Ícone de Localização */}
