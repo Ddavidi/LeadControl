@@ -13,6 +13,7 @@ namespace HipagesChallenge.Domain.Entities
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public LeadStatus Status { get; set; }
+        public bool WasDiscountApplied { get; set; } 
     }
 
     public enum LeadStatus

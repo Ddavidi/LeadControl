@@ -31,6 +31,30 @@ namespace HipagesChallenge.API.Controllers
             return Ok(leads);
         }
 
+        // POST: api/leads
+        [HttpPost]
+        public async Task<IActionResult> CreateLead([FromBody] Lead newLead)
+        {
+            // Validação básica para garantir que o objeto não é nulo
+            if (newLead == null)
+            {
+                return BadRequest("Lead data is null.");
+            }
+
+            // Define os valores padrão conforme a regra de negócio
+            newLead.Status = LeadStatus.Invited; // Status 0
+            newLead.DateCreated = DateTime.UtcNow; // Data e hora atuais
+
+            // Adiciona o novo lead ao contexto do banco de dados
+            await _context.Leads.AddAsync(newLead);
+
+            // Salva as alterações no banco
+            await _context.SaveChangesAsync();
+
+            // Retorna um status 201 Created com os dados do lead criado e a rota para acessá-lo
+            return CreatedAtAction(nameof(GetLeads), new { id = newLead.Id }, newLead);
+        }
+
         // POST: api/leads/1/accept
         [HttpPost("{id}/accept")]
         public async Task<IActionResult> AcceptLead(int id)
@@ -42,19 +66,17 @@ namespace HipagesChallenge.API.Controllers
                 return NotFound(); // Retorna 404 se o lead não for encontrado
             }
 
-            // Regra de negócio: Se o preço for maior que $500, aplica 10% de desconto
+            // --- LÓGICA DO DESCONTO ATUALIZADA ---
             if (lead.Price > 500)
             {
-                lead.Price *= 0.9m; // 0.9m é o mesmo que subtrair 10%
+                lead.Price *= 0.9m; // Aplica 10% de desconto
+                lead.WasDiscountApplied = true; // Define nossa flag como verdadeira
             }
 
-            // Atualiza o status para aceito
             lead.Status = LeadStatus.Accepted;
 
-            // Salva as alterações no banco de dados
             await _context.SaveChangesAsync();
 
-            // Envia a notificação por email (simulada)
             await _emailService.SendEmailAsync(
                 to: "vendas@test.com",
                 subject: "Lead Aceito!",

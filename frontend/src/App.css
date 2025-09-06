@@ -1,17 +1,33 @@
+:root {
+  --cor-principal: #FFB677;       /* Laranja principal */
+  --cor-fundo: #F2EEE5;           /* Cinza claro para o fundo */
+  --cor-aceito: #616F39;          /* Verde para a aba 'Accepted' */
+  --cor-recusado: #FF8364;        /* Vermelho cor para 'Declined' */
+  --cor-criar: #FFD98E;           /* Amarelo para 'Criar' */
+  --cor-texto: #343a40;           /* Cor escura para textos */
+  --cor-branco: #FFFFFF;          /* Branco */
+  --cor-borda: #dee2e6;           /* Cinza claro para bordas */
+}
+
+
 body {
-  background-color: #f8f9fa;
+  background-color: var(--cor-fundo); 
   font-family: sans-serif;
   margin: 0;
+  color: var(--cor-texto);
 }
+
 .App {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
 }
+
 .tabs {
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 2px solid var(--cor-borda);
   margin-bottom: 20px;
 }
+
 .tabs button {
   padding: 10px 20px;
   border: none;
@@ -20,23 +36,171 @@ body {
   font-size: 16px;
   margin-right: 10px;
   border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease-in-out; 
 }
-.tabs button.active {
-  border-bottom-color: #fd9800;
+
+/* Regra para a aba 'Invited' quando ativa */
+.tabs button.invited.active {
+  border-bottom-color: var(--cor-principal); /* Laranja */
   font-weight: bold;
 }
+
+/* Regra para a aba 'Accepted' quando ativa */
+.tabs button.accepted.active {
+  border-bottom-color: var(--cor-aceito); /* Verde */
+  font-weight: bold;
+}
+
 .lead-card {
-  background-color: white;
-  border: 1px solid #dee2e6;
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 .lead-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
 .lead-name { font-weight: bold; font-size: 1.2em; }
 .lead-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
 .lead-price { color: #6c757d; }
-.btn-accept, .btn-decline { padding: 10px 15px; border-radius: 5px; cursor: pointer; border: 1px solid; }
-.btn-accept { background-color: #fd9800; color: white; border-color: #fd9800; }
-.btn-decline { background-color: #e9ecef; color: #343a40; border-color: #ced4da; margin-left: 10px; }
+
+.btn-accept, .btn-decline { padding: 10px 15px; border-radius: 5px; cursor: pointer; border: 1px solid; transition: opacity 0.2s; }
+
+.btn-accept {
+  background-color: var(--cor-principal);
+  color: var(--cor-branco);
+  border-color: var(--cor-principal);
+}
+.btn-accept:hover {
+    opacity: 0.9;
+}
+
+.btn-decline { 
+  background-color: var(--cor-branco); 
+  color: var(--cor-texto); 
+  border-color: var(--cor-borda); 
+  margin-left: 10px; 
+}
+.btn-decline:hover {
+    background-color: #f8f9fa; /* Um cinza um pouco mais escuro no hover */
+}
+
+/* Regra para a nova aba 'Create' */
+.tabs button.create.active {
+  border-bottom-color: var(--cor-criar);
+  font-weight: bold;
+}
+
+/* Estilos para o formulário */
+.create-lead-form .form-group {
+  margin-bottom: 15px;
+}
+.create-lead-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.create-lead-form input,
+.create-lead-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  box-sizing: border-box; /* Garante que padding não afete a largura total */
+}
+.create-lead-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.btn-create {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--cor-criar);
+  color: var(--cor-texto);
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.error-message {
+  color: #dc3545; /* Vermelho para mensagens de erro */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Novos estilos para a seção de preço e desconto */
+.price-section {
+  display: flex;
+  flex-direction: column;
+  /* Alinha o conteúdo (linha do preço e linha do desconto) à direita */
+  align-items: flex-end;
+}
+
+.price-line {
+  display: flex;
+  /* Alinha verticalmente o ícone e o texto do preço */
+  align-items: center;
+  gap: 8px; /* Espaço entre o ícone e o preço */
+}
+
+.lead-price {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.discount-applied {
+  color: #28a745;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Cria um espaço entre os itens (ícone e texto) */
+  margin-bottom: 5px;
+}
+
+.lead-header, .lead-footer {
+  justify-content: space-between;
+}
+
+/* Remove o margin padrão dos parágrafos dentro dos detail-items */
+.detail-item p, .detail-item span {
+  margin: 0;
+}
+
+.icon {
+  color: var(--cor-principal); /* Usa a nossa cor laranja principal */
+  font-size: 1.1em; 
+  flex-shrink: 0; 
+}
+
+.lead-header .lead-date {
+  margin-left: auto; 
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+.price-section {
+  display: flex;
+  /* Alinha o ícone com o TOPO do bloco de texto, em vez de ao centro */
+  align-items: flex-start;
+  gap: 10px; /* Mantém o espaço entre o ícone e o texto */
+}
+
+.price-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* Alinha os textos (preço e desconto) à direita */
+  align-items: flex-end;
+}
+
+/* Ajuste para remover a margem inferior desnecessária do detail-item genérico */
+.lead-footer .detail-item {
+    margin-bottom: 0;
+}

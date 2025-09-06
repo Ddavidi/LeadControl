@@ -1,41 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import LeadList from './components/LeadList';
+import CreateLeadForm from './components/CreateLeadForm';
 import './App.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('invited'); // 'invited' ou 'accepted'
-  const [leads, setLeads] = useState([]); // Começa com uma lista vazia
+  const [activeTab, setActiveTab] = useState('invited');
+  const [leads, setLeads] = useState([]);
 
-  // IMPORTANTE: Verifique no terminal do seu backend qual porta ele está usando!
-  // Pode ser 7052, 7123, etc. E ajuste a URL abaixo se necessário.
   const API_URL = "https://localhost:7052/api";
 
-  // useEffect para buscar os dados da API quando o componente carregar
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        // Busca os dois tipos de leads
         const invitedResponse = await fetch(`${API_URL}/leads?status=Invited`);
         const acceptedResponse = await fetch(`${API_URL}/leads?status=Accepted`);
-
+        const declinedResponse = await fetch(`${API_URL}/leads?status=Declined`);
         const invitedData = await invitedResponse.json();
         const acceptedData = await acceptedResponse.json();
-
-        // Junta tudo em uma única lista e atualiza o estado
-        setLeads([...invitedData, ...acceptedData]);
+        const declinedData = await declinedResponse.json();
+        setLeads([...invitedData, ...acceptedData, ...declinedData]);
       } catch (error) {
         console.error("Falha ao buscar leads:", error);
       }
     };
-
     fetchLeads();
-  }, []); // O array vazio [] garante que isso rode apenas uma vez
+  }, []);
 
-  // Filtra os leads com base na aba ativa
   const invitedLeads = leads.filter(lead => lead.status === 0);
   const acceptedLeads = leads.filter(lead => lead.status === 1);
+  const declinedLeads = leads.filter(lead => lead.status === 2);
 
-  // Função para ACEITAR um lead
   const handleAccept = async (leadId) => {
     try {
       const response = await fetch(`${API_URL}/leads/${leadId}/accept`, {
@@ -43,9 +37,12 @@ function App() {
       });
 
       if (response.ok) {
-        // Atualiza o estado local para refletir a mudança instantaneamente
+        // 1. Pega os dados ATUALIZADOS do lead que a API retornou.
+        const updatedLead = await response.json();
+
+        // 2. Substitui o lead antigo na lista pelo lead totalmente atualizado.
         setLeads(leads.map(lead => 
-          lead.id === leadId ? { ...lead, status: 1 } : lead
+          lead.id === leadId ? updatedLead : lead
         ));
       }
     } catch (error) {
@@ -53,7 +50,6 @@ function App() {
     }
   };
 
-  // Função para RECUSAR um lead
   const handleDecline = async (leadId) => {
     try {
       const response = await fetch(`${API_URL}/leads/${leadId}/decline`, {
@@ -61,11 +57,47 @@ function App() {
       });
 
       if (response.ok) {
-        // Remove o lead da lista local para a UI atualizar
-        setLeads(leads.filter(lead => lead.id !== leadId));
+        setLeads(leads.map(lead => 
+          lead.id === leadId ? { ...lead, status: 2 } : lead
+        ));
       }
     } catch (error) {
       console.error("Falha ao recusar lead:", error);
+    }
+  };
+
+  const handleCreateLead = async (leadData) => {
+    try {
+      const response = await fetch(`${API_URL}/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData),
+      });
+
+      if (response.ok) {
+        const newLead = await response.json();
+        setLeads(prevLeads => [...prevLeads, newLead]);
+        setActiveTab('invited');
+      } else {
+        console.error("Falha ao criar lead:", await response.text());
+      }
+    } catch (error) {
+      console.error("Erro de rede ao criar lead:", error);
+    }
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'invited':
+        return <LeadList leads={invitedLeads} onAccept={handleAccept} onDecline={handleDecline} />;
+      case 'accepted':
+        return <LeadList leads={acceptedLeads} />;
+      case 'declined':
+        return <LeadList leads={declinedLeads} />;
+      case 'create':
+        return <CreateLeadForm onSubmit={handleCreateLead} />;
+      default:
+        return null;
     }
   };
 
@@ -73,20 +105,22 @@ function App() {
     <div className="App">
       <header className="app-header">
         <nav className="tabs">
-          <button onClick={() => setActiveTab('invited')} className={activeTab === 'invited' ? 'active' : ''}>
+          <button onClick={() => setActiveTab('invited')} className={`invited ${activeTab === 'invited' ? 'active' : ''}`}>
             Invited
           </button>
-          <button onClick={() => setActiveTab('accepted')} className={activeTab === 'accepted' ? 'active' : ''}>
+          <button onClick={() => setActiveTab('accepted')} className={`accepted ${activeTab === 'accepted' ? 'active' : ''}`}>
             Accepted
+          </button>
+          <button onClick={() => setActiveTab('declined')} className={`declined ${activeTab === 'declined' ? 'active' : ''}`}>
+            Declined
+          </button>
+          <button onClick={() => setActiveTab('create')} className={`create ${activeTab === 'create' ? 'active' : ''}`}>
+            Criar Nova Lead
           </button>
         </nav>
       </header>
       <main>
-        {activeTab === 'invited' ? (
-          <LeadList leads={invitedLeads} onAccept={handleAccept} onDecline={handleDecline} />
-        ) : (
-          <LeadList leads={acceptedLeads} />
-        )}
+        {renderContent()}
       </main>
     </div>
   );
